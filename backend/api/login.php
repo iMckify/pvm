@@ -14,7 +14,7 @@ $email = '';
 $password = '';
 
 $databaseService = new DatabaseService();
-$conn = $databaseService->getConnection();
+$pdo = $databaseService->getConnection();
 
 
 
@@ -27,7 +27,7 @@ $table_name = 'Users';
 
 $query = "SELECT id, password FROM " . $table_name . " WHERE email = ? LIMIT 0,1";
 
-$stmt = $conn->prepare( $query );
+$stmt = $pdo->prepare( $query );
 $stmt->bindParam(1, $email);
 $stmt->execute();
 $num = $stmt->rowCount();
@@ -44,23 +44,15 @@ if($num > 0){
         $expire_claim = $issuedat_claim + 3600; // expire time in seconds
         $token = array(
             "iat" => $issuedat_claim,
-            "nbf" => $issuedat_claim + 10, //not before in seconds
             "exp" => $expire_claim,
-            "user" => array(
-                "id" => $id,
-                "email" => $email
-        ));
+            "id" => $id,
+            "email" => $email
+        );
 
         http_response_code(200);
 
         $jwt = JWT::encode($token, $secret_key);
-        echo json_encode(
-            array(
-                "message" => "Successful login.",
-                "jwt" => $jwt,
-                "email" => $email,
-                "expireAt" => $expire_claim
-            ));
+        echo json_encode($jwt);
     }
     else{
 

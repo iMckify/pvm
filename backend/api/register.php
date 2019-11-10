@@ -9,10 +9,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $email = '';
 $password = '';
-$conn = null;
+$pdo = null;
 
 $databaseService = new DatabaseService();
-$conn = $databaseService->getConnection();
+$pdo = $databaseService->getConnection();
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -25,7 +25,7 @@ $query = "INSERT INTO " . $table_name . "
                 SET email = :email,
                     password = :password";
 
-$stmt = $conn->prepare($query);
+$stmt = $pdo->prepare($query);
 
 $stmt->bindParam(':email', $email);
 
