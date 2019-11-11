@@ -1,8 +1,6 @@
 {
-    "name": "pvm",
-    "description": "pvm IS",
     "require": {
         "firebase/php-jwt": "^5.0",
-        "ext-json": "*"
+        "ext-json": "^1.6"
     }
 }
