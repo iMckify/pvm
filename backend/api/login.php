@@ -18,10 +18,13 @@ $pdo = $databaseService->getConnection();
 
 
 
-$data = json_decode(file_get_contents("php://input"));
+//$data = json_decode(file_get_contents("php://input")); // for onj
+//$email = $data->email;
+//$password = $data->password;
 
-$email = $data->email;
-$password = $data->password;
+$data = json_decode(file_get_contents("php://input"), true);
+$email=$data['email'];
+$password = $data['password'];
 
 $table_name = 'Users';
 

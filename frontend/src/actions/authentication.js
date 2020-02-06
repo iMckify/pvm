@@ -27,6 +27,7 @@ export const loginUser = (user, openSnackbar, setError) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err);
       // console.log(`err.response.data.Status yra ${err.response.data.Status}`);
       // console.log(`err.response.status yra ${err.response.status}`);
       const errorData = {

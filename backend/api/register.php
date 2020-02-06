@@ -33,7 +33,6 @@ $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
 $stmt->bindParam(':password', $password_hash);
 
-
 if($stmt->execute()){
 
     http_response_code(200);
